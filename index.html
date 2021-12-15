@@ -54,7 +54,7 @@
 							<span class="input-group-btn">
 								<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Give me DTH	<i class="fa fa-caret-down" aria-hidden="true"></i></button>
 				        <ul class="dropdown-menu dropdown-menu-right">
-				          <li><a style="text-align: center;" onclick="tier= 0 ;symbol='BNB'; grecaptcha.execute()">10 DTH</a></li>
+				          <li><a style="text-align: center;" onclick="tier= 0 ;symbol='DTH'; grecaptcha.execute()">10 DTH</a></li>
 				        </ul>
 							</span>
 							<span class="input-group-btn">
@@ -107,7 +107,7 @@
 						"Content-Type": "application/json",
 						'Access-Control-Allow-Origin': '*'
 					},
-					"data": JSON.stringify({"walletid":$("#url")[0].value,"tokenname":"DTH"}),
+					"data": JSON.stringify({"walletid":$("#url")[0].value,"tokenname":symbol}),
 				};
 
 				$.ajax(settings).done(function (response) {
