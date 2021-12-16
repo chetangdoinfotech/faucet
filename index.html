@@ -111,8 +111,12 @@
 				};
 
 				$.ajax(settings).done(function (response) {
-					console.log(response);
-					alert("Your wallet has been funded.")
+					//console.log(response);
+					if(response.ERROR){
+					    alert("You Have already received this token, try tomorrow.")
+					}else{
+					   alert("Your wallet has been funded.")
+					}
 				});
 				grecaptcha.reset();
 			};
