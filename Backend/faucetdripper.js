@@ -11,7 +11,7 @@ var jsonParser = bodyParser.json();
 app.use(jsonParser);
 app.use(cors());
 //var DTH = 0.001 * 1000000000000000000;  // 0.001 DTH
-var DTH = 1 * 1000000000000000000;  // 1 DTH
+var DTH = 10 * 1000000000000000000;  // 10 DTH
 var CONTRACTABI = [{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Burn","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"target","type":"address"},{"indexed":false,"internalType":"bool","name":"frozen","type":"bool"}],"name":"FrozenAccounts","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"_from","type":"address"},{"indexed":true,"internalType":"address","name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address[]","name":"recipients","type":"address[]"},{"internalType":"uint256[]","name":"tokenAmount","type":"uint256[]"}],"name":"airdropACTIVE","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_spender","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"burn","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_from","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"burnFrom","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"changeSafeguardStatus","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"decrease_allowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"target","type":"address"},{"internalType":"bool","name":"freeze","type":"bool"}],"name":"freezeAccount","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"frozenAccount","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"increase_allowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"manualWithdrawEther","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"tokenAmount","type":"uint256"}],"name":"manualWithdrawTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"maxSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"target","type":"address"},{"internalType":"uint256","name":"mintedAmount","type":"uint256"}],"name":"mintToken","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"internalType":"address payable","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"safeguard","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_from","type":"address"},{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address payable","name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}];
 
 var adminWallet = process.env.ADMIN_WALLET;
@@ -113,7 +113,7 @@ async function checkDATE(clientip, wallet, res){
             return 0;
         }
     }catch(e){       
-    	  console.log(">>> Error >>>", e);
+    	  console.log(">>><<< Error >>><<<", e);
     	  res.send({"ERROR": e});                  
     }
     finally {
@@ -135,13 +135,21 @@ async function insertinDB(userWallet, res, clientip, xhash, contractused){
     }
 }
 
-async function insertin_adminLastNoncesDB(nonce){    
+async function insertin_adminLastNoncesDB(nonce){  
+	 console.log(">>> @@ nonne >>>",nonce);  
     const connection = mysql.createConnection(mydbobj);
     const db = makeDb();
     try{
-    	  var selectquery = `select lastNonce from adminLastNonces  where net='`+NET+`' AND AdminWalletId='`+adminWallet+`'`;
-		  var dblastnonce = await db.query(connection, selectquery); 
-		  if(dblastnonce.length > 0){ 	
+    	  var _selectquery = `select lastNonce from adminLastNonces where net='`+NET+`' AND AdminWalletId='`+adminWallet+`'`;    	  
+    	  console.log("SELECT QUERY >>>",_selectquery);
+		  var row = await db.query(connection, _selectquery);
+		  var dblastnonce = 0;
+		  if(row[0] !== undefined){
+		  		dblastnonce = row[0].lastNonce;
+		  }
+		  console.log(">>>> dblastnonce >>>",dblastnonce); 
+		  console.log(">>>> row.length >>>",row.length); 
+		  if(row.length > 0){ 	
 	     	  var updatequery = `UPDATE adminLastNonces SET lastNonce=`+nonce+` where net='`+NET+`' AND AdminWalletId='`+adminWallet+`'`;             
 	        await db.query(connection, updatequery);
 	     }else{
@@ -149,7 +157,7 @@ async function insertin_adminLastNoncesDB(nonce){
 	        await db.query(connection, _query);	     
 	     }
     }catch(e){   	      
-        res.send({"ERROR": e});          
+        console.log("@@>>> Error >>>",e);          
     }finally {
        db.close(connection);
     }
@@ -159,9 +167,17 @@ async function web3call_peggy(_contractaddr, userWallet, res, clientip, _peggyam
 	try{
 		const connection = mysql.createConnection(mydbobj);
 		const db = makeDb();
-		var _query = `select lastNonce from adminLastNonces where net='"+NET+"' AND AdminWalletId='"+adminWallet+"'`;
-		var dblastnonce = await db.query(connection, _query);
-		var nonce = await web3.eth.getTransactionCount(adminWallet,"pending");		
+		var _query = `select lastNonce from adminLastNonces where net='`+NET+`' AND AdminWalletId='`+adminWallet+`'`;
+		console.log("_query >>>>",_query);
+		var _row = await db.query(connection, _query);
+		console.log("Row length >>>",_row.length);
+      var dblastnonce = 0;     
+		if(_row[0] !== undefined){
+			dblastnonce = _row[0].lastNonce;
+		}
+		console.log("last>> dblastnonce>>>>",dblastnonce);		
+		var nonce = await web3.eth.getTransactionCount(adminWallet,"pending");
+		console.log(">>> pending nonce >>>>",nonce);		
 		var mynonce = dblastnonce;
 		if(nonce > dblastnonce){
 			mynonce = nonce;					
@@ -195,12 +211,13 @@ async function web3call_peggy(_contractaddr, userWallet, res, clientip, _peggyam
 	                           web3.eth.sendSignedTransaction(serializedTx.toString('hex'))
 	                           .on('transactionHash',function(xhash){                                                                                                                      
 	                               insertinDB(userWallet, res, clientip, xhash, _contractaddr);                                        
-	                               res.send({"userTxHash":xhash});                                        
+	                               res.send({"userTxHash":xhash});
+	                               insertin_adminLastNoncesDB(mynonce);                                        
 	                           })
-	                           .on('error', myerr => {                                    	 
-	                               res.send({"ERROR":myerr});                                                                                                                    
-	                           });
-	                           insertin_adminLastNoncesDB(mynonce);                           
+	                           .on('error', myerr => { 
+	                           	 console.log("@@##@@ ERROR @@##@@", myerr);                                   	 
+	                               res.send({"ERROR": myerr.toString()});                                                                                                                    
+	                           });	                                                      
 	                       }catch(e){              
 	                           console.log(">>> Error >>>", e);
 	                           res.send({"ERROR": e});
@@ -208,13 +225,13 @@ async function web3call_peggy(_contractaddr, userWallet, res, clientip, _peggyam
 	                   }
 	               });     
 	           }catch(e){                    	   
-	               console.log(">>> Error >>>", e);   
+	               console.log("<><> Error <><>", e);   
 	               res.send({"ERROR": e});                                     
 	           }               
 	       });                 
 	   })();		
 	}catch(e){
-		console.log(">>> Error >>>", e);
+		console.log(">@><@< Error >@><@<", e);
 	}
 }
 
