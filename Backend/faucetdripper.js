@@ -47,31 +47,43 @@ app.post('/dripit', cors(), function (req, res, next){
 	    			break;    			    		
 	    		case "BTC":
 	    			var peggyamt = process.env.PEGGY_BTC;
-	    			sendPeggy(req, res, next, peggyamt);    			
+	    			var _contract = process.env.BTC_CONTRACT;
+	    			sendPeggy(req, res, next, peggyamt, _contract);    			
 	    			break;
-	    		case "BUSD": 
+	    		case "BUSD":
 	    			var peggyamt = process.env.PEGGY_BUSD;
-	    			sendPeggy(req, res, next, peggyamt);    			
+	    			var _contract = process.env.BUSD_CONTRACT;
+	    			sendPeggy(req, res, next, peggyamt, _contract);    			
 	    			break;
 	    		case "DAI":
 	    			var peggyamt = process.env.PEGGY_DAI;
-	    			sendPeggy(req, res, next, peggyamt);    			
+	    			var _contract = process.env.DAI_CONTRACT;
+	    			sendPeggy(req, res, next, peggyamt, _contract);    			
 	    			break;
 	    		case "ETH":
 	    			var peggyamt = process.env.PEGGY_ETH;
-	    			sendPeggy(req, res, next, peggyamt);    			
+	    			var _contract = process.env.ETH_CONTRACT;
+	    			sendPeggy(req, res, next, peggyamt, _contract);    			
 	    			break;
 	    		case "USDC":
 	    			var peggyamt = process.env.PEGGY_USDC;
-	    			sendPeggy(req, res, next, peggyamt);    			
+	    			var _contract = process.env.USDC_CONTRACT;
+	    			sendPeggy(req, res, next, peggyamt, _contract);    			
 	    			break;
 	    		case "USDT":
 	    			var peggyamt = process.env.PEGGY_USDT;
-	    			sendPeggy(req, res, next, peggyamt);    			
+	    			var _contract = process.env.USDT_CONTRACT;
+	    			sendPeggy(req, res, next, peggyamt, _contract);    			
 	    			break;
 	    		case "XRP":
 	    			var peggyamt = process.env.PEGGY_XRP;
-	    			sendPeggy(req, res, next, peggyamt);
+	    			var _contract = process.env.XRP_CONTRACT;
+	    			sendPeggy(req, res, next, peggyamt, _contract);
+	    			break;
+	    	  case "DUSD":
+	    			var peggyamt = process.env.PEGGY_DUSD;
+	    			var _contract = process.env.DUSD_CONTRACT;
+	    			sendPeggy(req, res, next, peggyamt, _contract);
 	    			break;
 	    		default: 
 	    			res.send({"ERROR": "REQUESTED TOKEN NOT VALID"});
@@ -90,13 +102,13 @@ async function sendDTH(req, res, next){
    })                                                     
 }
 
-async function sendPeggy(req, res, next, peggyamt){
+async function sendPeggy(req, res, next, peggyamt, _mycontract){
 	var _clientip = req.ip.split(':').pop();
 	var _userWallet = req.body.walletid.toString();
 			
 	checkDATE(_clientip, _userWallet, res).then((_cnt) =>{
 		if(_cnt < 1){				
-			web3call_peggy(process.env.BTC_CONTRACT, _userWallet, res, _clientip, peggyamt, true);
+			web3call_peggy(_mycontract, _userWallet, res, _clientip, peggyamt, true);
 		}
 	})
 }
@@ -183,6 +195,7 @@ async function web3call_peggy(_contractaddr, userWallet, res, clientip, _peggyam
 			mynonce = nonce;					
 		}		
 		if(_ispeggy){        
+			console.log(">>>>> Selected Contract Addr <<<<<", _contractaddr);
     		const contractInstance = new web3.eth.Contract(CONTRACTABI, _contractaddr);    
     		var mydata = contractInstance.methods.transfer(userWallet, _peggyamt).encodeABI();    
     		var requiredGas = await contractInstance.methods.transfer(userWallet, _peggyamt).estimateGas({from: adminWallet});
@@ -197,12 +210,13 @@ async function web3call_peggy(_contractaddr, userWallet, res, clientip, _peggyam
 		                 chainId: CHAINID 
 		        };  
 	       	  if(_ispeggy){
-		           myrawTx['data'] = mydata;
+		           myrawTx['data'] = mydata;          
 		           myrawTx['gasLimit'] = requiredGas; 		                  
 		        }else{
 					  myrawTx['value'] = DTH;           
 					  myrawTx['gasLimit'] = 30000;        
-		        }               
+		        }  
+		        console.log("RawTx >>>>", myrawTx);             
 	           try{       
 	               web3.eth.accounts.signTransaction(myrawTx, PK, function(error,result){
 	                   if(! error){
