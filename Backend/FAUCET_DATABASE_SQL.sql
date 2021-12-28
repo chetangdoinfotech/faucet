@@ -54,6 +54,7 @@ CREATE TABLE `dth_faucet` (
   `txhash` varchar(100) NOT NULL,
   `contractused` varchar(100) NOT NULL DEFAULT '',
   `net` set('mainnet','testnet') DEFAULT 'testnet',
+  `token_name` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `_idx` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
