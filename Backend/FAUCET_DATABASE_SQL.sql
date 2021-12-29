@@ -49,7 +49,7 @@ DROP TABLE IF EXISTS `dth_faucet`;
 CREATE TABLE `dth_faucet` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `client_ip` varchar(13) NOT NULL DEFAULT '',
+  `client_ip` varchar(50) NOT NULL DEFAULT '',
   `client_wallet` varchar(42) NOT NULL DEFAULT '',
   `txhash` varchar(100) NOT NULL,
   `contractused` varchar(100) NOT NULL DEFAULT '',
