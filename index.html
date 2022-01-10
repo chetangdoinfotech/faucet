@@ -15,7 +15,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-noty/2.4.1/packaged/jquery.noty.packaged.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
-		
+		<link rel="stylesheet" href="assets/css/alertify.min.css">
 		<style>
 			.vertical-center {
 				min-height: 100%;
@@ -53,52 +53,54 @@
 							<input id="url" name="url" type="text" class="form-control" placeholder="Input your Dithreum address...">
 							<span class="input-group-btn">
 								<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Give me DTH	<i class="fa fa-caret-down" aria-hidden="true"></i></button>
-				        <ul class="dropdown-menu dropdown-menu-right">
-				          <li><a style="text-align: center;" onclick="tier= 0 ;symbol='DTH'; grecaptcha.execute()">10 DTH</a></li>
-				        </ul>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li><a style="text-align: center;" onclick="tier= 0 ;symbol='DTH'; grecaptcha.execute()">10 DTH</a></li>
+								</ul>
 							</span>
 							<span class="input-group-btn">
 								<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Peggy tokens<i class="fa fa-caret-down" aria-hidden="true"></i></button>
-				        <ul class="dropdown-menu dropdown-menu-right"> 
-								<li><a style="text-align: center;" onclick="symbol=&#34;BTC&#34;; grecaptcha.execute()">0.1 BTC</a></li>
-								<li><a style="text-align: center;" onclick="symbol=&#34;ETH&#34;; grecaptcha.execute()">0.1 ETH</a></li>		
-								<li><a style="text-align: center;" onclick="symbol=&#34;DUSD&#34;; grecaptcha.execute()">10 DUSD</a></li>		
-								<li><a style="text-align: center;" onclick="symbol=&#34;BUSD&#34;; grecaptcha.execute()">10 BUSD</a></li>
-								<li><a style="text-align: center;" onclick="symbol=&#34;DAI&#34;; grecaptcha.execute()">10 DAI</a></li>
-								<li><a style="text-align: center;" onclick="symbol=&#34;USDC&#34;; grecaptcha.execute()">10 USDC</a></li>
-								<li><a style="text-align: center;" onclick="symbol=&#34;USDT&#34;; grecaptcha.execute()">10 USDT</a></li>
-								<li><a style="text-align: center;" onclick="symbol=&#34;XRP&#34;; grecaptcha.execute()">10 XRP</a></li>
-				        </ul>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li><a style="text-align: center;" onclick="symbol=&#34;BTC&#34;; grecaptcha.execute()">0.1 BTC</a></li>
+									<li><a style="text-align: center;" onclick="symbol=&#34;ETH&#34;; grecaptcha.execute()">0.1 ETH</a></li>
+									<li><a style="text-align: center;" onclick="symbol=&#34;DUSD&#34;; grecaptcha.execute()">10 DUSD</a></li>
+									<li><a style="text-align: center;" onclick="symbol=&#34;BUSD&#34;; grecaptcha.execute()">10 BUSD</a></li>
+									<li><a style="text-align: center;" onclick="symbol=&#34;DAI&#34;; grecaptcha.execute()">10 DAI</a></li>
+									<li><a style="text-align: center;" onclick="symbol=&#34;USDC&#34;; grecaptcha.execute()">10 USDC</a></li>
+									<li><a style="text-align: center;" onclick="symbol=&#34;USDT&#34;; grecaptcha.execute()">10 USDT</a></li>
+									<li><a style="text-align: center;" onclick="symbol=&#34;XRP&#34;; grecaptcha.execute()">10 XRP</a></li>
+								</ul>
 							</span>
 						</div>
 						<div class="g-recaptcha" data-sitekey="6LcUh58dAAAAAAD1hIFVeQEVmk_iSuQmgMcTkfFe" data-callback="submit" data-size="invisible"></div>
 					</div>
 				</div>
 				<div class="row" style="margin-top: 32px;">
-						<div class="col-lg-6 col-lg-offset-3">
+					<div class="col-lg-6 col-lg-offset-3">
 						<div class="panel panel-small panel-default">
 							<div class="panel-body" style="padding: 0; overflow: auto; max-height: 300px;">
 								<table id="requests" class="table table-condensed" style="margin: 0;"></table>
 							</div>
 							<div class="panel-footer">
-								<table style="width: 100%"><tr>
-									<td style="text-align: center;"><i class="fa fa-rss" aria-hidden="true"></i> <span id="peers"></span> peers</td>
-									<td style="text-align: center;"><i class="fa fa-database" aria-hidden="true"></i> <span id="block"></span> blocks</td>
-									<td style="text-align: center;"><i class="fa fa-heartbeat" aria-hidden="true"></i> <span id="funds"></span> DTH</td>
-									<td style="text-align: center;"><i class="fa fa-university" aria-hidden="true"></i> <span id="funded"></span> funded</td>
-								</tr></table>
+								<table style="width: 100%">
+									<tr>
+										<td style="text-align: center;"><i class="fa fa-rss" aria-hidden="true"></i> <span id="peers"></span> peers</td>
+										<td style="text-align: center;"><i class="fa fa-database" aria-hidden="true"></i> <span id="block"></span> blocks</td>
+										<td style="text-align: center;"><i class="fa fa-heartbeat" aria-hidden="true"></i> <span id="funds"></span> DTH</td>
+										<td style="text-align: center;"><i class="fa fa-university" aria-hidden="true"></i> <span id="funded"></span> funded</td>
+									</tr>
+								</table>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
+		<script src="assets/js/alertify.js"></script>
 		<script>
-			
-			
-			
-			var submit = function(captcha) {
+
+
+
+			var submit = function (captcha) {
 				var settings = {
 					"url": "https://api.dithereum.io/faucet",
 					"method": "POST",
@@ -108,20 +110,20 @@
 						"Content-Type": "application/json",
 						'Access-Control-Allow-Origin': '*'
 					},
-					"data": JSON.stringify({"walletid":$("#url")[0].value,"tokenname":symbol}),
+					"data": JSON.stringify({ "walletid": $("#url")[0].value, "tokenname": symbol }),
 				};
-
+                alertify.alert("SUCCESS", "Processing Your Request.");
 				$.ajax(settings).done(function (response) {
 					//console.log(response);
-					if(response.ERROR){
-					    alert("You Have already received token, try tomorrow.")
-					}else{
-					   alert("Your wallet has been funded.")
+					if (response.ERROR) {
+                        alertify.alert("WARNING", "You Have already received token, try tomorrow.");
+					} else {
+                        alertify.alert("SUCCESS", "Your wallet has been funded.");
 					}
 				});
 				grecaptcha.reset();
 			};
-			
+
 		</script>
 		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 	</body>
