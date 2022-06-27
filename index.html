@@ -116,9 +116,10 @@
 				$.ajax(settings).done(function (response) {
 					//console.log(response);
 					if (response.ERROR) {
-                        alertify.alert("WARNING", "You Have already received token, try tomorrow.");
+                        			//alertify.alert("WARNING", "You Have already received token, try tomorrow.");
+						alertify.alert("WARNING", response.ERROR);
 					} else {
-                        alertify.alert("SUCCESS", "Your wallet has been funded.");
+                        			alertify.alert("SUCCESS", "Your wallet has been funded.");
 					}
 				});
 				grecaptcha.reset();
