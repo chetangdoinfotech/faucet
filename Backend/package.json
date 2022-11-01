@@ -1,21 +1,24 @@
 {
-  "name": "dth_faucet",
+  "name": "generic_faucet",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "faucet.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "ninjacoder",
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.0",
     "cors": "^2.8.5",
-    "dotenv-defaults": "^3.0.0",
-    "express": "^4.17.1",
+    "dotenv-defaults": "^5.0.0",
+    "express": "^4.18.1",
     "mysql": "^2.18.1",
     "mysql-async-simple": "^1.0.3",
-    "wallet-validator": "^0.3.8",
-    "web3": "^1.6.0"
+    "package.json": "^2.0.1",
+    "pm2": "^5.2.0",
+    "wallet-validator": "^0.3.12",
+    "web3": "^1.7.3"
   }
 }
+
