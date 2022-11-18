@@ -10,8 +10,7 @@ class JsonStorage {
             fs.writeFileSync(STORAGE_PATH, '{}');
         } else if (!fs.existsSync(STORAGE_PATH)) {
             fs.writeFileSync(STORAGE_PATH, '{}');
-        }
-
+        } 
         return fs.readFileSync(STORAGE_PATH).toString();
     }
 
@@ -46,15 +45,15 @@ class JsonStorage {
     }
 
     static tokentimestamp_checker(walletid, tokenname){
-        console.log("~~~~~~~~~~~~~~~~~~~~~~~!!!!!@@@@@@@@@@@@############$$$$$$$$$$$$$");
-        console.log(">>>>tokenname >>>",tokenname);        
-        console.log("~~~~~~~~~~~~~~~~~~~~~~~!!!!!@@@@@@@@@@@@############$$$$$$$$$$$$$");        
+        //console.log("~~~~~~~~~~~~~~~~~~~~~~~!!!!!@@@@@@@@@@@@############$$$$$$$$$$$$$");
+        //console.log(">>>>tokenname >>>",tokenname);        
+        //console.log("~~~~~~~~~~~~~~~~~~~~~~~!!!!!@@@@@@@@@@@@############$$$$$$$$$$$$$");        
         const content = this._open();              
         try{
             const json = JSON.parse(content);
-            console.log(json[walletid]);                      
-            // records are older than 24 hours for given token, update timestamp to new timestamp
-            console.log("For >>", json[walletid][tokenname]);            
+            //console.log(json[walletid]);                      
+            //records are older than 24 hours for given token, update timestamp to new timestamp
+            //console.log("For >>", json[walletid][tokenname]);            
             if(typeof json[walletid][tokenname] === 'undefined'){
                     console.log(">>>> Create new entry for token, token not exists ..");    
                     json[walletid][tokenname] = Date.now();

@@ -5,7 +5,7 @@ let STORAGE_FOLDER = './jsondatastore';
 let STORAGE_PATH = STORAGE_FOLDER + '/admin.json';
 
 const Web3 = require('web3');
-var COINS_TO_SEND = process.env.COINS_TO_SEND;// 10 * 1000000000000000000;  10 ZCH
+var COINS_TO_SEND = process.env.COINS_TO_SEND;// 10 * 1000000000000000000;  10 DTH
 var TOKEN_ABI = JSON.parse(process.env.TOKEN_ABI);
 
 var adminWallet = process.env.ADMIN_WALLET;
@@ -47,14 +47,14 @@ class transactionSender{
     }
 
     static setnonce(_newnonce){
-        console.log("~~~~~~~~~$$$$$$~~~~~~~~~~");
-        console.log("_newnonce >>>", _newnonce);
-        console.log("~~~~~~~~~$$$$$$~~~~~~~~~~");
+        //console.log("~~~~~~~~~$$$$$$~~~~~~~~~~");
+        //console.log("_newnonce >>>", _newnonce);
+        //console.log("~~~~~~~~~$$$$$$~~~~~~~~~~");
         const content = this._open();        
         try{
             const json = JSON.parse(content);
-            console.log(">>>json <<<<~~~~~",json);
-            console.log(">>>json <<<<~~~~~",json['lastnonce']);
+            //console.log(">>>json <<<<~~~~~",json);
+            //console.log(">>>json <<<<~~~~~",json['lastnonce']);
             if(_newnonce){                
                 console.log("!! setnonce, if condition, _newnonce !!",_newnonce);    
                 json['lastnonce'] = _newnonce;
@@ -115,17 +115,14 @@ class transactionSender{
                                 //Transaction hash can be stored but commented as json file size will get increase, if needed uncomment it it will work
                                 //JsonStorage.set_transaction_hash(_userwallet, process.env.COIN_NAME, xhash);                                                                                
                                 //console.log(">@@@@@@>>>mynoncemynonce  >$$$$>>>",mynonce);
-                                var z = transactionSender.setnonce(mynonce); 
-                                //return({"userTxHash":xhash});                                                                      
+                                var z = transactionSender.setnonce(mynonce);                                 
                             })
                             .on('error', myerr => { 
-                                //console.log("@@##@@ ERROR @@##@@", myerr);                                   	 
-                                //res.send({"ERROR": myerr.toString()}); 
+                                //console.log("@@##@@ ERROR @@##@@", myerr);                                   	                                 
                                 return({"ERROR": myerr.toString()});                                                                                                                   
                             });                                                        
                         }catch(e){              
-                            //console.log(">>> Error >>>", e);
-                            //res.send({"ERROR": e});
+                            //console.log(">>> Error >>>", e);                            
                             return({"ERROR": e.toString()});
                         }
                     }
@@ -141,33 +138,31 @@ class transactionSender{
     }
 
     static async tokentransaction(userwallet, peggyamt, _tokename, _contractaddr){                                    
-            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            console.log(">>>>> userwallet, peggyamt, _tokename, _contractaddr >>>>>", userwallet, peggyamt, _tokename, _contractaddr);
-            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            //console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            //console.log(">>>>> userwallet, peggyamt, _tokename, _contractaddr >>>>>", userwallet, peggyamt, _tokename, _contractaddr);
+            //console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             
             try{
                 web3.eth.accounts.wallet.add(process.env.ADMIN_PK);
                 let dblastnonce = parseInt(this.getnonce()['lastnonce']);                
-                console.log("last>> dblastnonce>>>>",dblastnonce);		
+                //console.log("last>> dblastnonce>>>>",dblastnonce);		
                 var nonce = await web3.eth.getTransactionCount(adminWallet,"pending");
-                console.log(">>> pending nonce >>>>",nonce);	
+                //console.log(">>> pending nonce >>>>",nonce);	
                 var mynonce = dblastnonce;
                 if(nonce > dblastnonce){
                     mynonce = nonce;					
                 }		
                 const token = new web3.eth.Contract(TOKEN_ABI, _contractaddr);    		
                 var requiredGas = await token.methods.transfer(userwallet, peggyamt).estimateGas({from: process.env.ADMIN_WALLET});
-                console.log("@ <<< REQUIRED GAS >> @@", requiredGas);    		
+                //console.log("@ <<< REQUIRED GAS >> @@", requiredGas);    		
                 return await token.methods.transfer(userwallet, peggyamt).send({from: process.env.ADMIN_WALLET, gas: requiredGas}).then(function (result) {                    
                     if(result.status){
                         var xhash = result.transactionHash;
                         //console.log(">>> result.status >>>", result.status);
                         //console.log(">>> result.transactionHash >>>", result.transactionHash);                                                
                         //Transaction hash can be stored but commented as json file size will get increase, if needed uncomment it it will work
-                        //JsonStorage.set_transaction_hash(userwallet, _tokename, result.transactionHash);                                                
-                        //res.send({"userTxHash": xhash});                        
-                        var z = transactionSender.setnonce(mynonce);
-                        //console.log("ZZZZ >>>>>",z);        
+                        //JsonStorage.set_transaction_hash(userwallet, _tokename, result.transactionHash);                                                                                      
+                        var z = transactionSender.setnonce(mynonce);                  
                         return({"userTxHash": result.transactionHash})                                        
                     }        		
                 }).catch(console.log);   		    		                
