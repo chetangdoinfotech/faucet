@@ -201,7 +201,7 @@
 			var submit = function (captcha) {
 				alertify.alert("SUCCESS", "Processing Your Request.");
 				//jquery POST req
-				$.post('https://faucet-api.dithereum.org',{ "walletid": $("#url")[0].value, "tokenname": symbol }, function(response){
+				$.post('https://faucet-api.dithereum.org',{ walletid: $("#url")[0].value, tokenname: symbol }, function(response){
 					console.log(response);
 					if (response.ERROR) {
 						alertify.alert("WARNING", response.ERROR);
