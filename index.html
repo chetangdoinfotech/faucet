@@ -199,9 +199,9 @@
 
 
 			var submit = function (captcha) {
-				alertify.alert("SUCCESS", "Processing Your Request.");
+				//alertify.alert("SUCCESS", "Processing Your Request.");
 				//jquery POST req
-				console.log($("#url")[0].value, symbol);
+				/*console.log($("#url")[0].value, symbol);
 				$.post('https://faucet-api.dithereum.org',{ walletid: $("#url")[0].value, tokenname: symbol }, function(response){
 					console.log(response);
 					if (response.ERROR) {
@@ -210,17 +210,16 @@
 					else {
 						alertify.alert("SUCCESS", "Your wallet has been funded.");
 					}
-				})
+				})*/
 				//end
 
-				/*var settings = {
+				var settings = {
 					"url": "https://faucet-api.dithereum.org",
 					"method": "POST",
 					"crossDomain": true,
 					"timeout": 0,
 					"headers": {
 						"Content-Type": "application/json",
-						'Access-Control-Allow-Origin': '*'
 					},
 					"data": JSON.stringify({ "walletid": $("#url")[0].value, "tokenname": symbol }),
 				};
@@ -231,7 +230,7 @@
 					} else {
 						alertify.alert("SUCCESS", "Your wallet has been funded.");
 					}
-				});*/
+				});
 				grecaptcha.reset();
 			};
 
