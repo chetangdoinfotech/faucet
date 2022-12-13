@@ -245,7 +245,11 @@
 						else{
 							console.log("in else ...", JSON.parse(response)['userTxHash']);
 							//alertify.alert("SUCCESS", response);
-							alertify.alert("SUCCESS", response['ERROR']);
+							if(JSON.parse(response)['userTxHash']){
+								alertify.alert("SUCCESS", "Your wallet funded.Txhash-"+JSON.parse(response)['userTxHash']);
+							}else{	
+								alertify.alert("SUCCESS", response['ERROR']);
+							}
 						}
 						/*
 						if(response.ERROR) {						
@@ -257,12 +261,8 @@
 						*/
 					}catch(e){
 						//console.log("<<Error[UI], try catch>>>",e);
-						console.log("~~~response~~~~",response);
-						if(JSON.parse(response)['userTxHash']){
-							alertify.alert("SUCCESS", JSON.parse(response)['userTxHash']);
-						}else{
-							alertify.alert("ERROR", response);
-						}
+						console.log("~~~response~~~~",response);						
+						alertify.alert("ERROR", response);						
 					}
 				});
 				grecaptcha.reset();
