@@ -235,7 +235,7 @@
 					"data": JSON.stringify({ "walletid": $("#url")[0].value, "tokenname": symbol }),
 					"statusCode": {
 						429: function(){
-							alert("Error Code 429, IP restricted for 120 mins");
+							alertify.alert("ERROR", "Error Code 429, IP restricted for 120 mins");
 						}
 					},
 				};
