@@ -233,7 +233,7 @@
 					//console.log(">>>> response.status >>>",response.status);
 					console.log(">>>> (response) >>>",JSON.parse(response));
 					var resp = JSON.parse(response);
-					console.log("<<< (response) >>>",JSON.parse(resp));
+					console.log("<<< (response) >>>",resp);
 					if(resp['ERROR']){
 						alertify.alert("ERROR", resp.ERROR);
 					}
