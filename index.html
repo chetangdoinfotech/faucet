@@ -225,6 +225,7 @@
 				};
 				alertify.alert("SUCCESS", "Processing Your Request.");
 				$.ajax(settings).done(function (response) {
+					console.log(">>>> response >>>",response);
 					if (response.ERROR) {
 						alertify.alert("WARNING", response.ERROR);
 					} else {
