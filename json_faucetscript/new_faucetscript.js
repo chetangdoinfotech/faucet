@@ -21,7 +21,6 @@ app.use(function(req, res, next) {
 
 //// limiter added  25112022
 const rateLimit = require('express-rate-limit')
-//const limiter_message = 'Your IP Restricted for '+process.env.IP_RESTRICTED_MINUTES.toString()+" mins.";
 
 const limiter = rateLimit({
 	windowMs: process.env.IP_RESTRICTED_MINUTES * 60 * 1000, // IP_RESTRICTED_MINUTES minutes 
@@ -127,8 +126,8 @@ app.post('/dripit', limiter, function (req, res, next){
 
 
 async function sendCOINS(req, res, next){ 
-	var _clientip = req.ip.split(':').pop();      
-	var userWallet = req.body.walletid.toString();    
+  var _clientip = req.ip.split(':').pop();      
+  var userWallet = req.body.walletid.toString();    
   //console.log(">>> req.body.walletid  >>>", req.body.walletid);        
   const myObject = JsonStorage.get(req.body.walletid.toString())  
   //console.log(">>>>> QQQQQ myObject>>>>>",myObject);
@@ -162,10 +161,8 @@ async function sendCOINS(req, res, next){
         console.log("Error..",e);
       }
     }else if(chk === "DONTSEND"){      
-        try{   
-            //res.json({"ERROR": "ALREADY GIVEN!"});
-            res.write(JSON.stringify({"ERROR": "ALREADY GIVEN!"})); 
-            //res.status(200).json({"ERROR": "ALREADY GIVEN!"}); 
+        try{           
+            res.write(JSON.stringify({"ERROR": "ALREADY GIVEN!"}));             
             res.end();     
         }catch(e){
             console.log(">>>>> CHK <<<<<<", chk);
@@ -179,8 +176,8 @@ async function sendCOINS(req, res, next){
 
 
 async function sendPeggy(req, res, next, peggyamt, _mycontract, tokenname){	
-	  var _clientip = req.connection.remoteAddress.split(':').pop();
-	  var _userWallet = req.body.walletid.toString();
+    var _clientip = req.connection.remoteAddress.split(':').pop();
+    var _userWallet = req.body.walletid.toString();
     console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     console.log(">>>>peggyamt >>>", peggyamt);        
     const myObject = JsonStorage.get(req.body.walletid.toString())  
@@ -209,8 +206,7 @@ async function sendPeggy(req, res, next, peggyamt, _mycontract, tokenname){
       if(chk === "SENDIT"){     
         console.log(" >>> in  if conditon, chk [SENDIT] >>>, peggyamt >>",peggyamt);                                           
         var txHash = await transactionSender.tokentransaction(req.body.walletid.toString(), peggyamt, req.body.tokenname.toString(), process.env[req.body.tokenname.toString()+"_CONTRACT"]);
-        console.log(">>>> sendPeggy >>>> RETURn this hash to user >>>>",txHash);        
-        //res.send(txHash);            
+        console.log(">>>> sendPeggy >>>> RETURn this hash to user >>>>",txHash);                      
         res.json(txHash);        
       }
       if(chk === "DONTSEND"){     
