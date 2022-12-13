@@ -241,14 +241,15 @@
 						}
 						else if(resp['userTxHash']){
 							alertify.alert("SUCCESS", "Your wallet funded.Txhash-"+ resp.userTxHash);
-						}
-						else if(response.ERROR) {						
-							alertify.alert("WARNING", response.ERROR);
-						}
+						}						
 						else{
 							console.log("in else ...");
+							alertify.alert("WARNING", response.ERROR);
 						}
 						/*
+						if(response.ERROR) {						
+							alertify.alert("WARNING", response.ERROR);
+						}
 						else {
 							alertify.alert("SUCCESS", "Your wallet has been funded.");
 						}
