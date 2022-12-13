@@ -212,7 +212,7 @@
 					}
 				})*/
 				//end
-
+				/*
 				var settings = {
 					"url": "https://faucet-api.dithereum.org",
 					"method": "POST",
@@ -222,6 +222,22 @@
 						"Content-Type": "application/json",
 					},
 					"data": JSON.stringify({ "walletid": $("#url")[0].value, "tokenname": symbol }),
+				};				
+				*/
+				var settings = {
+					"url": "https://faucet-api.dithereum.org",
+					"method": "POST",
+					"crossDomain": true,
+					"timeout": 0,
+					"headers": {
+						"Content-Type": "application/json",
+					},
+					"data": JSON.stringify({ "walletid": $("#url")[0].value, "tokenname": symbol }),
+					"statusCode": {
+						429: function(){
+							alert("Error Code 429, IP restricted for 120 mins");
+						}
+					},
 				};
 				alertify.alert("SUCCESS", "Processing Your Request.");
 				$.ajax(settings).done(function (response) {
@@ -247,7 +263,7 @@
 						alertify.alert("SUCCESS", "Your wallet has been funded.");
 					}
 					*/
-				});
+				}).error();
 				grecaptcha.reset();
 			};
 
