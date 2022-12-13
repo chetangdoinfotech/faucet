@@ -231,14 +231,22 @@
 					if(resp['ERROR']){
 						alertify.alert("ERROR", resp.ERROR);
 					}
-					if(resp['IP_ERROR']){
+					else if(resp['IP_ERROR']){
 						alertify.alert("ERROR", resp.IP_ERROR);
 					}
+					else if(resp['userTxHash']){
+						alertify.alert("SUCCESS", "Your wallet has been funded. Txhash-"+ resp.userTxHash);
+					}else{
+						console.log(" in else ..");
+					}
+					/*
 					if (response.ERROR) {						
 						alertify.alert("WARNING", response.ERROR);
-					} else {
+					}					
+					else {
 						alertify.alert("SUCCESS", "Your wallet has been funded.");
 					}
+					*/
 				});
 				grecaptcha.reset();
 			};
