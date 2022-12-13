@@ -253,7 +253,9 @@
 						alertify.alert("SUCCESS", "Your wallet has been funded.");
 					}
 					*/
-				}).error();
+				}).fail(function(obj, failstatus){
+					alertify.alert(">>>failstatus >>>",failstatus);
+				});
 				grecaptcha.reset();
 			};
 
