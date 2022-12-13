@@ -255,6 +255,7 @@
 					}catch(e){
 						console.log("<<Error[UI], try catch>>>",e);
 						console.log("~~~response~~~~",response);
+						alertify.alert("ERROR", response);
 					}
 				});
 				grecaptcha.reset();
