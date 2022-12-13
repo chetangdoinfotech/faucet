@@ -227,7 +227,14 @@
 				$.ajax(settings).done(function (response) {
 					console.log(">>>> response >>>",response);
 					console.log(">>>> (response) >>>",JSON.parse(response));
-					if (response.ERROR) {
+					var resp = JSON.parse(response);
+					if(resp['ERROR']){
+						alertify.alert("ERROR", resp.ERROR);
+					}
+					if(resp['IP_ERROR']){
+						alertify.alert("ERROR", resp.IP_ERROR);
+					}
+					if (response.ERROR) {						
 						alertify.alert("WARNING", response.ERROR);
 					} else {
 						alertify.alert("SUCCESS", "Your wallet has been funded.");
