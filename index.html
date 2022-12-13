@@ -243,8 +243,9 @@
 							alertify.alert("SUCCESS", "Your wallet funded.Txhash-"+ resp.userTxHash);
 						}						
 						else{
-							console.log("in else ...");
-							alertify.alert("WARNING", response.ERROR);
+							console.log("in else ...", response);
+							alertify.alert("SUCCESS", response);
+							//alertify.alert("SUCCESS", response['ERROR']);
 						}
 						/*
 						if(response.ERROR) {						
