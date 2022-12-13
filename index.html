@@ -245,7 +245,11 @@
 						else{
 							console.log("in else ...", response);
 							//alertify.alert("SUCCESS", response);
-							alertify.alert("SUCCESS", response['ERROR']);
+							if(respose['userTxHash']){
+								alertify.alert("SUCCESS", response['userTxHash']);
+							}else{
+								alertify.alert("SUCCESS", response['ERROR']);
+							}
 						}
 						/*
 						if(response.ERROR) {						
