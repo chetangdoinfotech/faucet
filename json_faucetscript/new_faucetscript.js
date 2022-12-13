@@ -28,7 +28,7 @@ const limiter = rateLimit({
 	max: process.env.MAX_REQUEST_PER_IP, // Limit each IP to MAX_REQUEST_PER_IP requests per `window` (here, per 120 minutes)
 	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
 	legacyHeaders: false, // Disable the `X-RateLimit-*` headers  
-  message: {"IP_ERROR": 'Your IP Restricted for '+process.env.IP_RESTRICTED_MINUTES.toString()+" mins."},// Too many requests message
+  	message: {"IP_ERROR": 'Your IP Restricted for '+process.env.IP_RESTRICTED_MINUTES.toString()+" mins."},// Too many requests message
 })
 
 var tokensAllowed = process.env.ALLOWED_TOKENS;
@@ -43,7 +43,7 @@ app.post('/dripit', limiter, function (req, res, next){
         myrawHeadersObject[myrawHeaders[i]] = myrawHeaders[i+1];       
       }
     }
-    var chk = UserAgentChecker.chekuseragent(myrawHeadersObject['User-Agent']);          
+    var chk = UserAgentChecker.chekuseragent(myrawHeadersObject['user-agent']);          
     if(! chk){
         res.json({"ERROR": "Sorry Bro! you are not valid requester!, can't give you coins/tokens"})                
     }else{    
@@ -70,7 +70,7 @@ app.post('/dripit', limiter, function (req, res, next){
             //console.log(">> In app.post block >> for userwallet, dripwhat >>",userWallet,dripwhat);
             //console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");      
             switch(dripwhat){
-                  case process.env.COIN_NAME.toString():		
+                case process.env.COIN_NAME.toString():		
                   sendCOINS(req, res, next);				
                   break;    			    		
                 case process.env.BTC_TOKEN_NAME.toString():
