@@ -258,8 +258,8 @@
 					}catch(e){
 						//console.log("<<Error[UI], try catch>>>",e);
 						console.log("~~~response~~~~",response);
-						if(respose.userTxHash){
-							alertify.alert("SUCCESS", response['userTxHash']);
+						if(JSON.parse(response)['userTxHash']){
+							alertify.alert("SUCCESS", JSON.parse(response)['userTxHash']);
 						}else{
 							alertify.alert("ERROR", response);
 						}
