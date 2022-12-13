@@ -243,7 +243,7 @@
 							alertify.alert("SUCCESS", "Your wallet funded.Txhash-"+ resp.userTxHash);
 						}						
 						else{
-							console.log("in else ...", response);
+							console.log("in else ...", JSON.parse(response)['userTxHash']);
 							//alertify.alert("SUCCESS", response);
 							alertify.alert("SUCCESS", response['ERROR']);
 						}
