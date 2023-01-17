@@ -1,0 +1,34 @@
+<html>    
+    <head>        
+        <script>            
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({
+                "tokenname": "BTC",
+                "walletid": "0xb02a2eda1b317fbd16760128836b0ac59b560e9d"
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+
+            fetch("http://dream.bakrol:9991/dripit", requestOptions)
+            .then(response => response.text())
+            .then(result => { console.log(result); alert(result); })
+            .catch(error => { console.log('error', error); alert(error); });
+        </script>
+    </head>
+    <body>
+        <h1> Hello</h1>
+        <!--
+        <script>
+            var uuid = new DeviceUUID().get();
+            console.log(uuid);
+        </script>
+        -->
+    </body>
+</html>

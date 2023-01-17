@@ -212,7 +212,7 @@
 					}
 				})*/
 				//end
-
+				
 				var settings = {
 					"url": "https://faucet-api.dithereum.org",
 					"method": "POST",
@@ -222,13 +222,47 @@
 						"Content-Type": "application/json",
 					},
 					"data": JSON.stringify({ "walletid": $("#url")[0].value, "tokenname": symbol }),
+					"statusCode": {
+						429: function(){
+							alertify.alert("ERROR", "Error Code 429, IP restricted for 120 mins");
+						}
+					},
 				};
 				alertify.alert("SUCCESS", "Processing Your Request.");
 				$.ajax(settings).done(function (response) {
-					if (response.ERROR) {
-						alertify.alert("WARNING", response.ERROR);
-					} else {
-						alertify.alert("SUCCESS", "Your wallet has been funded.");
+					try{
+						var resp = JSON.parse(JSON.stringify(response));
+						console.log("<<< (response) >>>",resp);
+						if(resp['ERROR']){
+							alertify.alert("ERROR", resp.ERROR);
+						}
+						else if(resp['IP_ERROR']){
+							alertify.alert("ERROR", resp.IP_ERROR);
+						}
+						else if(resp['userTxHash']){
+							alertify.alert("SUCCESS", "Your wallet funded.Txhash-"+ resp.userTxHash);
+						}						
+						else{
+							console.log("in else ...", JSON.parse(response)['userTxHash']);
+							//alertify.alert("SUCCESS", response);
+							if(JSON.parse(response)['userTxHash']){
+								alertify.alert("SUCCESS", "Your wallet funded.Txhash-"+JSON.parse(response)['userTxHash']);
+							}else{	
+								alertify.alert("SUCCESS", response['ERROR']);
+							}
+						}
+						/*
+						if(response.ERROR) {						
+							alertify.alert("WARNING", response.ERROR);
+						}
+						else {
+							alertify.alert("SUCCESS", "Your wallet has been funded.");
+						}
+						*/
+					}catch(e){
+						//console.log("<<Error[UI], try catch>>>",e);
+						console.log("~~~response~~~~",response);						
+						alertify.alert("ERROR", response);						
 					}
 				});
 				grecaptcha.reset();
