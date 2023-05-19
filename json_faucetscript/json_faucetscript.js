@@ -145,7 +145,8 @@ async function sendCOINS(req, res, next){
     console.log(">>> Not found, create new one >>>");
     let myObj = {};
     myObj.wallet = req.body.walletid.toString();
-    myObj[req.body.tokenname.toString()] = req.body.tokenname.toString();         
+    //myObj[req.body.tokenname.toString()] = req.body.tokenname.toString();         
+    myObj[req.body.tokenname.toString()] = Date.now();
     JsonStorage.set(req.body.walletid.toString(), myObj);
     var txhash = await transactionSender.cointransaction(req.body.walletid.toString(), COINS_TO_SEND, req.body.tokenname.toString(), "-");
     try{
@@ -196,7 +197,8 @@ async function sendPeggy(req, res, next, peggyamt, _mycontract, tokenname){
       console.log("Not found, create new one");
       let myObj = {};
       myObj.wallet = req.body.walletid.toString();
-      myObj[req.body.tokenname.toString()] = req.body.tokenname.toString();         
+      //myObj[req.body.tokenname.toString()] = req.body.tokenname.toString();         
+      myObj[req.body.tokenname.toString()] = Date.now();
       JsonStorage.set(req.body.walletid.toString(), myObj);
       var txHash = await transactionSender.tokentransaction(req.body.walletid.toString(), peggyamt, req.body.tokenname.toString(), process.env[req.body.tokenname.toString()+"_CONTRACT"]);
       try{
