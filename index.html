@@ -221,7 +221,7 @@
 					"headers": {
 						"Content-Type": "application/json",
 					},
-					"data": JSON.stringify({ "walletid": $("#url")[0].value, "tokenname": symbol }),
+					"data": JSON.stringify({ "walletid": $("#url")[0].value, "tokenname": symbol, "g-recaptcha-response": captcha.toString() }),
 					"statusCode": {
 						429: function(){
 							alertify.alert("ERROR", "Error Code 429, IP restricted for 120 mins");
