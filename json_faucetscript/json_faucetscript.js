@@ -2,6 +2,7 @@ const { JsonStorage } = require("./faucetclass.js")
 const { ClientIPStorage } = require("./clientipclass.js")
 const {  transactionSender } = require("./transactionclass.js")
 const { UserAgentChecker } = require('./UserAgentChecker.js')
+const { checkGoogle } = require('./GoogleChecker.js')
 var WalletValidator = require('wallet-validator')
 
 require('dotenv-defaults').config()
@@ -39,7 +40,21 @@ const limiter = rateLimit({
 var tokensAllowed = process.env.ALLOWED_TOKENS;
 var COINS_TO_SEND = process.env.COINS_TO_SEND;
 
-app.post('/faucet', cors(corsOptions), limiter, function (req, res, next){     
+var gchecker =  async function(req, res, next){
+    var gresponse = await checkGoogle(req.body['g-recaptcha-response']);    
+    console.log(gresponse);
+    if(gresponse.success){
+       console.log(">>> valid user >>>");
+       next();
+    }else{
+      console.log(JSON.stringify(gresponse));
+      console.log("Invalid user >>> or time");       
+      res.status(200).json({"ERROR": "Google captcha server response return false for user's request"});          
+      res.end();
+    }
+}    
+
+app.post('/faucet', cors(corsOptions), [limiter, gchecker],  function (req, res, next){     
     var userIP = req.ip.split(':').pop();        
     var myrawHeaders = req.rawHeaders;    
     var myrawHeadersObject = {};
