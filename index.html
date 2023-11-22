@@ -195,7 +195,29 @@
 		</footer>
 		<script src="assets/js/alertify.js"></script>
 		<script>
-
+			<!---
+			    To make add to metamask button active, 
+			     This block change as per your network -chainId in hexdec, chainName, nativeCurrency( name, symbol, decimals ), rpcUrls, blockchainExplorerUrls   
+			-->
+			$('#addDTHNetwork').click(function(){
+			    if(window.ethereum) {               
+			        window.ethereum.request({method: 'eth_requestAccounts'})
+			        window.ethereum.request({
+			            method: 'wallet_addEthereumChain',
+			            params: [{
+			                chainId: '0xe0', 
+			                chainName: "ABC Testnet",
+			                nativeCurrency: {
+			                    name: "ABC Network",
+			                    symbol: "ABC",
+			                    decimals: 18
+			                },
+			                rpcUrls: ['https://testnet-rpc.abc.network/'],     blockExplorerUrls: ['https://testnet.abc.network/']                    
+			            }]
+			        })				   
+			    }
+			});
+			<!---	-->		
 
 
 			var submit = function (captcha) {
