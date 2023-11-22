@@ -20,7 +20,7 @@ var corsOptions = {
 }  
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://faucet.dithereum.org");
+  res.header("Access-Control-Allow-Origin", process.env.FAUCET_URL);
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
